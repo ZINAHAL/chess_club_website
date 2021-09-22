@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block page_title %}Club's Calendar{% endblock %}
+{% block page_heading %}Calendar{% endblock %}
+{% load static %}
+{% block content %}
+<!--The class for the entire calendar page-->
+<div class="homebck">
+    <div class="box center_text calendar_box_extra">
+        {% if admin_content %}
+            <div class="table-responsive">
+                <table class="table table-borderless calendar_table">
+                    <thead>
+                        <tr>
+                            <th style="background-color: black; color: var(--light_brown)">DATE</th>
+                            <th style="background-color: var(--dark_brown); color: black">EVENT</th>
+                            <th style="background-color: black; color: var(--light_brown)">LOCATION</th>
+                            <th style="background-color: var(--dark_brown); color: black">DETAILS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in admin_content %}
+                            <tr>
+                                <td>{{ event.date }}</td>
+                                <td class="text-capitalize">{{ event.name }}</td>
+                                <td class="text-capitalize">{{ event.location }}</td>
+                                <td>
+                                    <a class="btn btn-primary" role="button"  href="{% if not event.information_url %}
+                                                                                                    {% url 'eventInformation' event.id %}
+                                                                                                    {% else %}
+                                                                                                    {{ event.information_url }}
+                                                                                                    {% endif %}">Info</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="notice">CURRENTLY THERE ARE NO EVENTS HELD</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

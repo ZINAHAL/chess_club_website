@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}Login{% endblock %}
+{% block content %}
+<!--Login Form with password reset link-->
+<div class="limiter">
+    <div class="auth_container">
+        <div class="auth_wrap">
+            <form method="post" class="auth_form">
+                <h1 class="center_text">LOGIN</h1>
+                {% csrf_token %}
+                {{ login_form | crispy }}
+                {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+                <div class="center_text">
+                    <p><button type="submit" class="btn btn-primary">Login</button></p>
+                    <p><a href="{%url 'reset_password'%}" class="btn btn-primary">Forgot your password?</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

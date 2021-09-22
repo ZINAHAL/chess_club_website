@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block page_title %}Home Page{% endblock %}
+{% block page_heading %}Home{% endblock %}
+{% load static %}
+{% load home_extra_tags %}
+{% block content %}
+<!--The class for the entire home page-->
+{% if admin_content %}
+    <div class="homebck">
+        <img src="{% static 'images/club_logo.png' %}" class="img-fluid mx-auto d-block">
+
+        <div class="summary_box">
+            <div class="row">
+                <div class="col-sm-5 align-self-center">
+                    <img src="{{ MEDIA_URL }}{{ admin_content.summary_image }}">
+                </div>
+                <div class="col-sm-7 text_box">
+                    <p>
+                        {{ admin_content.summary_introduction | safe }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- <hr> -->
+        <div class="slideshow_container">
+            <nav>
+                <div class="nav nav-pills justify-content-center">
+                    <a class="nav-item nav-link active" data-toggle="pill" href="#nav-committee">Committee</a>
+                    <a class="nav-item nav-link" data-toggle="pill" href="#nav-coaches">Coaches</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade active show" id="nav-committee">
+                    <div class="mentors_slideshow">
+                        {% for member in admin_content.committee %}
+                            <div>
+                                <img src="{{ MEDIA_URL }}{{ member.image }}">
+                                <h6 class="font-weight-bold">{{ member.fullname }}</h6>
+                                <h6 class="font-weight-bold">{{ member.position }}</h6>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tab-pane fade active hideDiv" id="nav-coaches">
+                    <div class="mentors_slideshow">
+                        {% for member in admin_content.coaches %}
+                            <div>
+                                <img src="{{ MEDIA_URL }}{{ member.image }}">
+                                <h6 class="font-weight-bold">{{ member.fullname }}</h6>
+                                <h6 class="font-weight-bold">{{ member.position }}</h6>
+                            </div>
+                        {% endfor %}
+                    </div>   
+                </div>
+            </div>
+        </div>
+
+        <div class="box center_text">
+            <h3 class="font-weight-bold">BENEFACTORS</h3>
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    {% for chunk in admin_content.benefactors|listChuncks:3 %}
+                        <tr>
+                            {% for b in chunk %}
+                                <td class="ben_data">{{ b }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <!-- <hr> -->
+        <div class="slideshow_container">
+            <h3 class="font-weight-bold">SPONSORS</h3>
+            <div class="sponsors_slideshow">
+                {% for sponsor in admin_content.sponsors %}
+                    <div>
+                        <a href="{{ sponsor.company_homepage_URL }}" target="_blank">
+                            <img src="{{ MEDIA_URL }}{{ sponsor.company_logo }}">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endif %}
+{% endblock %}

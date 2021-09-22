@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block page_title %}Information - {{ event.name }}{% endblock %}
+{% block page_heading %}Information{% endblock %}
+{% block content %}
+<!--The class for the information page of an event-->
+
+<div class="homebck" id="eventInfo_page">
+    <div class="box center_text info_box_extra">
+        <h2 class="text-uppercase font-weight-bolder mb-4">{{ event.name }}</h2>
+        {% for info_section in event.informationSections %}
+        <div class="text-left">
+            <h3 class="font-weight-bold">{{ info_section.title }}</h3>
+            <p>{{ info_section.paragraph | safe }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

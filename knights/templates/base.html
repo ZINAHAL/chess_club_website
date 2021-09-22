@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>{% block page_title %}{% endblock %}</title>
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+		integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg">
+		<a class="navbar-brand" href="{% url 'index' %}"><i class="fas fa-chess"></i></a>
+		<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarColor01"
+			aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav mr-auto" id="menueOptions">
+				<!--The ids for 'a' tag must be in the form: {starting name for url path - see knights/urls.py}_a  -->
+				<!--Heading for Home page-->
+				<li class="nav-item">
+					<a id="home_a" class="nav-link" href="{% url 'index' %}">
+						Home
+					</a>
+				</li>
+				<!--Heading for Gallery page-->
+				<li class="nav-item">
+					<a id="gallery_a" class="nav-link" href="{% url 'gallery' %}">
+						Gallery
+					</a>
+				</li>
+				<!--Heading for Documents page-->
+				<li class="nav-item">
+					<a id="documents_a" class="nav-link" href="{% url 'documents' %}">
+						Documents
+					</a>
+				</li>
+				<!--Heading for Calender page-->
+				<li class="nav-item">
+					<a id="calendar_a" class="nav-link" href="{% url 'calendar' %}">
+						Calendar
+					</a>
+				</li>
+				<!--Heading for Contact page-->
+				<li class="nav-item">
+					<a id="contact_a" class="nav-link" href="{% url 'contactUs' %}">
+						Contact Us
+					</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" id="signupin">
+				{% if user.is_authenticated %}
+				<!--Heading for Logout if user is logged in-->
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'logout'%}">
+						<i class="fas fa-sign-out-alt"></i>Logout</a>
+				</li>
+				{% else %}
+				<!--Heading for sign in if user is logged out-->
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'login'%}">
+						<i class="fas fa-sign-in-alt"></i>
+						Login</a>
+				</li>
+				<!--Heading for register if user is logged out-->
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<i class="fas fa-user-plus"></i>Register</a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+	</nav>
+	<!--If there are python messages on any page, show the message-->
+	{% if messages %}
+	<div class="center_text messages">
+		{% for message in messages %} {{ message }} {% endfor %}
+	</div>
+	<br>
+	{% endif %}
+	<!--Main content area-->
+
+	{% block content %}{% endblock %}
+
+
+	<!--Footer-->
+	<footer class="page-footer font-weight-bold text-center">
+		<i class="fas fa-copyright"></i> {% now "Y" %} Knights of Éanna <br>
+		CREATED BY: Zinah Al-Baghdadi, Dave Tynan, Conor Dunne
+	</footer>
+	<!--static JS-->
+	<script src="{% static 'js/script.js' %}"></script>

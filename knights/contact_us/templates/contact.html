@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block page_title %}Contact Us{% endblock %}
+{% block page_heading %}Contact{% endblock %}
+{% block content %}
+<!--The class for the entire contact us page-->
+{% if admin_content %}
+<div class="homebck">
+    <div class="box text-left">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2385.1975783612543!2d-6.298463748225687!3d53.28599567986815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670ba32d03ac5f%3A0xb003badaed9e539c!2zQ29sw6Fpc3RlIMOJYW5uYQ!5e0!3m2!1sen!2sie!4v1606076220810!5m2!1sen!2sie" 
+                            width="570" 
+                            height="450" 
+                            style="border:black 1px solid;" 
+                            allowfullscreen="" 
+                            aria-hidden="false" 
+                            tabindex="0"></iframe>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><i class="fas fa-phone-square-alt h4"></i></td>
+                            <td>{{ admin_content.number }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-envelope h4"></i></td>
+                            <td>{{ admin_content.email }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-map-marker-alt h4"></i></td>
+                            <td>{{ admin_content.address }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box center_text">
+        <a href="https://www.facebook.com/pawngrabbers/" target="_blank"><i class="fab fa-facebook h1 mr-5"></i></a>
+        <a href="https://twitter.com/KnightsOfEanna" target="_blank"><i class="fab fa-twitter h1"></i></a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

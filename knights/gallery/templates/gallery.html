@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block page_title %}Club's Gallery{% endblock %}
+{% block page_heading %}Gallery{% endblock %}
+{% comment %} {% load static %} {% endcomment %}
+{% block content %}
+<div class="homebck">
+    {% if admin_content %}
+        <button id="back-to-top-button" type="button" class="btn btn-link"><i class="fas fa-arrow-alt-circle-up display-3"></i></button>
+        {% for gallery in admin_content %}
+            <div class="box gallery_box_extra">
+                <h3 class="text-center text-uppercase font-weight-bold mb-4">{{ gallery.title }}</h3>
+                <p>{{ gallery.description | safe }}</p>
+                <div class="gallery_slideshow">
+                    {% for photo in gallery.gallery_photoes %}
+                        <div>
+                            <img src="{{ MEDIA_URL }}{{ photo.image }}" class="img-fluid">
+                            <p class="mt-3">{{ photo.description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        {% comment %} <div class="notice">CURRENTLY THERE ARE NO GALLERIES TO SHOW</div> {% endcomment %}
+    {% endif %}
+</div>
+{% endblock %}

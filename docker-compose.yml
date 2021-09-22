@@ -1,0 +1,24 @@
+services:
+  uwsgi_django:
+    build: .
+    volumes:
+      - static_data:/knights/static
+      - media_data:/knights/media 
+      - socket_files:/knights/unix_sockets
+
+  nginx_server:
+    build: ./chess_nginx
+    ports: 
+      - "8080:8080"
+    volumes: 
+      - static_data:/chess_site/static
+      - media_data:/chess_site/media
+      - socket_files:/unix_sockets
+    depends_on:
+      - "uwsgi_django"
+
+volumes:
+  static_data:
+  media_data:
+  socket_files:
+

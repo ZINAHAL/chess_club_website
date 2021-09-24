@@ -6,6 +6,7 @@ DOCKER:
 LOCAL SERVER:
 - make the needed changes in the stared comments ("***********") of settings.py file
 - python3 -m venv venv
-- source venv/bit/activate
+- source venv/bin/activate
+- pip install -r knights/requirements.txt
 - python knights/manage.py runserver
 - access the site @ localhost:8000
